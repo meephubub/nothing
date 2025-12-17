@@ -63,10 +63,16 @@ export default function PayPage() {
                 >
                     Confirm Payment
                 </button>
-
+                <button
+                    onClick={() => window.open('https://throne.com/payfornothing', '_blank')}
+                    className="cursor-target px-8 py-3 bg-black text-white text-lg font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-colors"
+                >
+                    Buy me a suit...
+                </button>
                 <Link href="/" className="text-white/60 hover:text-white text-sm uppercase tracking-widest transition-colors cursor-target">
                     Cancel
                 </Link>
+
             </div>
         </div>
     );
