@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useCallback, useMemo } from 'react';
+import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 import './TargetCursor.css';
 
@@ -11,6 +12,7 @@ const TargetCursor = ({
   hoverDuration = 0.2,
   parallaxOn = true
 }) => {
+  const pathname = usePathname();
   const cursorRef = useRef(null);
   const cornersRef = useRef(null);
   const spinTl = useRef(null);
@@ -302,7 +304,7 @@ const TargetCursor = ({
       targetCornerPositionsRef.current = null;
       activeStrengthRef.current = 0;
     };
-  }, [targetSelector, spinDuration, moveCursor, constants, hideDefaultCursor, isMobile, hoverDuration, parallaxOn]);
+  }, [targetSelector, spinDuration, moveCursor, constants, hideDefaultCursor, isMobile, hoverDuration, parallaxOn, pathname]);
 
   useEffect(() => {
     if (isMobile || !cursorRef.current || !spinTl.current) return;
