@@ -1,0 +1,31 @@
+{
+    "brand": "nada",
+    "home": {
+        "cta": "Danos Dinero.",
+        "count_value": "34",
+        "count_unit": "personas",
+        "count_label": "han dado dinero"
+    },
+    "pay": {
+        "title": "Pagar por Nada",
+        "description": "Estás a punto de pagar por absolutamente nada. Sin bienes, sin servicios, solo puro vacío.",
+        "cta_kofi": "Pagar con Ko-fi",
+        "cta_crypto": "Pagar con Cripto",
+        "cancel": "Cancelar",
+        "alert_min": "Por favor ingrese un monto válido (mínimo $0.50)"
+    },
+    "nav": {
+        "home": "Inicio",
+        "pay": "Pagar",
+        "about": "Acerca de",
+        "leaderboard": "Tabla de clasificación"
+    },
+    "about": {
+        "title": "Nada.",
+        "p1": "Deseo ilimitado. Recursos finitos. El problema económico básico.",
+        "p2": "Ahora tienes una solución. Puedes comprar nada.",
+        "p3": "Compras nada todo el tiempo — suscripciones no usadas, seguros no reclamados, una caldera nueva.",
+        "p4": "Excepto que ahora finalmente sabes a dónde va ese dinero. A ningún lugar.",
+        "tagline": "No tendrás nada. Y será tuyo."
+    }
+}

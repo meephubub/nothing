@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { cn } from '@/lib/utils'; // Assuming this exists, or I'll standard clsx/tailwind-merge
 import Dither from './Dither'; // Not needed here? Ah, user wants it on page.
+import { useFeatureGate } from '@statsig/react-bindings';
 
 // Since I don't know if lib/utils exists for sure (it usually does in shadcn-like setups, but I'll check or inline clsx/tw-merge safe usage if I can't confirm. The package.json has clsx and tailwind-merge. I'll stick to standard imports if utils is missing, but I'll try to be safe).
 // Actually, I'll just use standard template literals or a simple helper if needed, but given the file list earlier showed 'lib' dir, it probably has utils.
@@ -13,13 +15,27 @@ import Dither from './Dither'; // Not needed here? Ah, user wants it on page.
 // Let me verify lib exists from file list in step 4. yes "lib" isDir.
 
 /**
- * @param {{ links?: { label: string, href: string }[] }} props
+ * @param {{ links?: { label: string, href: string }[], brand?: string, lang?: string }} props
  */
-export default function Navigation({ links = [] }) {
+export default function Navigation({ links = [], brand = "nothing", lang = "en" }) {
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
     const overlayRef = useRef(null);
     const linksRef = useRef(null);
+    const pathname = usePathname();
+
+    // Statsig gate for leaderboard visibility
+    const { value: showLeaderboard } = useFeatureGate('show_leaderboard');
+
+    const filteredLinks = useMemo(() => {
+        return links.filter((link) => {
+            // Hide leaderboard link if gate is off
+            if (link.href.includes('/leaderboard') && !showLeaderboard) {
+                return false;
+            }
+            return true;
+        });
+    }, [links, showLeaderboard]);
 
     const tlRef = useRef(null);
 
@@ -56,6 +72,17 @@ export default function Navigation({ links = [] }) {
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
+    const getSwitchedPath = (targetLang) => {
+        if (!pathname) return `/${targetLang}`;
+        const segments = pathname.split('/').filter(Boolean);
+        if (segments[0] === 'en' || segments[0] === 'es') {
+            segments[0] = targetLang;
+        } else {
+            segments.unshift(targetLang);
+        }
+        return `/${segments.join('/')}`;
+    }
+
     return (
         <>
             {/* Header */}
@@ -68,7 +95,13 @@ export default function Navigation({ links = [] }) {
                 </button>
 
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto bg-black text-white p-2 px-4 rounded-md">
-                    <h1 className="text-2xl font-bold tracking-tighter uppercase">nothing</h1>
+                    <h1 className="text-2xl font-bold tracking-tighter uppercase">{brand}</h1>
+                </div>
+
+                <div className="pointer-events-auto flex items-center gap-2 bg-black text-white p-2 px-3 rounded-md">
+                    <Link href={getSwitchedPath('en')} className={`font-bold transition-opacity hover:opacity-100 ${lang === 'en' ? 'opacity-100' : 'opacity-40'}`}>EN</Link>
+                    <span className="opacity-30">/</span>
+                    <Link href={getSwitchedPath('es')} className={`font-bold transition-opacity hover:opacity-100 ${lang === 'es' ? 'opacity-100' : 'opacity-40'}`}>ES</Link>
                 </div>
             </div>
 
@@ -79,7 +112,7 @@ export default function Navigation({ links = [] }) {
                 data-open={isOpen}
             >
                 <ul ref={linksRef} className="text-center space-y-8">
-                    {links.map((item, i) => (
+                    {filteredLinks.map((item, i) => (
                         <li key={item.label} className="translate-y-10 opacity-0">
                             <Link
                                 href={item.href}

@@ -1,0 +1,31 @@
+{
+    "brand": "nothing",
+    "home": {
+        "cta": "Give Us Money.",
+        "count_value": "34",
+        "count_unit": "people",
+        "count_label": "have given money"
+    },
+    "pay": {
+        "title": "Pay for Nothing",
+        "description": "You are about to pay for absolutely nothing. No goods, no services, just pure void.",
+        "cta_kofi": "Pay with Ko-fi",
+        "cta_crypto": "Pay with Crypto",
+        "cancel": "Cancel",
+        "alert_min": "Please enter a valid amount (minimum $0.50)"
+    },
+    "nav": {
+        "home": "Home",
+        "pay": "Pay",
+        "about": "About",
+        "leaderboard": "Leaderboard"
+    },
+    "about": {
+        "title": "Nothing.",
+        "p1": "Unlimited want. Finite resources. The basic economic problem.",
+        "p2": "Now you have a solution. You can buy nothing.",
+        "p3": "You buy nothing all the time — unused subscriptions, unclaimed insurance, a new boiler.",
+        "p4": "Except now you finally know where that money goes. Nowhere.",
+        "tagline": "You will own nothing. And it will be yours."
+    }
+}
