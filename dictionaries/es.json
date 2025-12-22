@@ -27,5 +27,11 @@
         "p3": "Compras nada todo el tiempo — suscripciones no usadas, seguros no reclamados, una caldera nueva.",
         "p4": "Excepto que ahora finalmente sabes a dónde va ese dinero. A ningún lugar.",
         "tagline": "No tendrás nada. Y será tuyo."
+    },
+    "thankYou": {
+        "title": "Gracias",
+        "description": "Has pagado exitosamente por nada.",
+        "message": "Tu contribución al vacío es apreciada.",
+        "cta": "Volver al Inicio"
     }
 }

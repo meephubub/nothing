@@ -25,7 +25,12 @@
         "p1": "Unlimited want. Finite resources. The basic economic problem.",
         "p2": "Now you have a solution. You can buy nothing.",
         "p3": "You buy nothing all the time — unused subscriptions, unclaimed insurance, a new boiler.",
-        "p4": "Except now you finally know where that money goes. Nowhere.",
-        "tagline": "You will own nothing. And it will be yours."
+        "p4": "Except now you finally know where that money goes. Nowhere."
+    },
+    "thankYou": {
+        "title": "Thank You",
+        "description": "You have successfully paid for nothing.",
+        "message": "Your contribution to the void is appreciated.",
+        "cta": "Return Home"
     }
 }
