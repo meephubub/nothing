@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import Link from 'next/link';
+import PaymentoButton from '@/components/PaymentoButton';
 
 export default function PayClient({ dict, lang }: { dict: any, lang: string }) {
     const router = useRouter();
@@ -26,30 +27,12 @@ export default function PayClient({ dict, lang }: { dict: any, lang: string }) {
                         {dict.pay.cta_kofi}
                     </button>
 
-                    <button
-                        onClick={async () => {
-                            try {
-                                const res = await fetch('/api/guardarian', {
-                                    method: 'POST',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({ amount: 10 }),
-                                });
-                                const data = await res.json();
-                                if (data.url) {
-                                    window.location.href = data.url;
-                                } else {
-                                    console.error('Guardarian error:', data.error);
-                                    alert(data.error || 'Failed to create transaction');
-                                }
-                            } catch (err) {
-                                console.error('Guardarian fetch error:', err);
-                                alert('Failed to connect to payment service');
-                            }
-                        }}
+                    <PaymentoButton
+                        amount={10}
+                        currency="USD"
                         className="cursor-target w-full px-8 py-4 bg-[#1a1a1a] text-white text-lg font-bold uppercase tracking-wider hover:bg-[#2a2a2a] transition-all shadow-[4px_4px_0_0_rgba(255,255,255,0.2)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0_0_rgba(255,255,255,0.2)] active:translate-x-0 active:translate-y-0 active:shadow-none"
-                    >
-                        {dict.pay.cta_crypto}
-                    </button>
+                        label={dict.pay.cta_crypto}
+                    />
                 </div>
 
                 <Link href={`/${lang}`} className="text-white/60 hover:text-white text-sm uppercase tracking-widest transition-colors cursor-target mt-4">
